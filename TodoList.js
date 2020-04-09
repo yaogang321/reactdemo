@@ -23,11 +23,24 @@ class TodoList extends Component{
         })
     }
         
+    //点击更改完成状态
+    changeDone = (changeitemContent) =>{
+        const changeList = this.state.todoList.map(item =>{
+            if(item.content == changeitemContent)
+                return {content:item.content,done:true}
+            else{
+                return {content:item.content,done:item.done}
+            } 
+        })
+        this.setState({
+            todoList:changeList
+        })
+    }
 
     render(){
         return(
             <div>
-                {this.state.todoList.map(item =><ListItem item={item}/>)}
+                {this.state.todoList.map(item =><ListItem item={item} changeDone={this.changeDone}/>)}
                 <NewItem addItem = {this.addNewItem}/>
             </div>
         );
